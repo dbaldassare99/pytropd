@@ -511,6 +511,8 @@ def TropD_Metric_PSI(
     V: np.ndarray,
     lat: np.ndarray,
     lev: np.ndarray,
+    subpolar_boundary = 30.0,
+    polar_boundary = 60.0,
     method: str = "Psi_500",
     lat_uncertainty: float = 0.0,
 ) -> np.ndarray:
@@ -589,8 +591,6 @@ def TropD_Metric_PSI(
         raise ValueError("unrecognized method ", method)
 
     # define regions of interest
-    subpolar_boundary = 30.0
-    polar_boundary = 60.0
     mask = (lat > 0) & (lat < polar_boundary)
     subpolar_mask = (lat > 0) & (lat < subpolar_boundary)
     # split into hemispheres
