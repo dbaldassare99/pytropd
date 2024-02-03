@@ -693,6 +693,8 @@ def TropD_Metric_STJ(
     U: np.ndarray,
     lat: np.ndarray,
     lev: np.ndarray,
+    eq_boundary = 10,
+    polar_boundary = 60,
     method: str = "adjusted_peak",
     n_fit: int = 1,
     **maxlat_kwargs,
@@ -785,8 +787,6 @@ def TropD_Metric_STJ(
     else:  # core_peak, core_max methods
         u = u_int
 
-    eq_boundary = 10
-    polar_boundary = 60
     mask = (lat > eq_boundary) & (lat < polar_boundary)
 
     if method != "fit":
