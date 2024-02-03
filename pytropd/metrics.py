@@ -396,6 +396,9 @@ def TropD_Metric_OLR(
 def TropD_Metric_PE(
     pe: np.ndarray,
     lat: np.ndarray,
+    eq_boundary = 5.0,
+    subpolar_boundary = 50.0,
+    polar_boundary = 60.0,
     method: str = "zero_crossing",
     lat_uncertainty: float = 0.0,
 ) -> np.ndarray:
@@ -455,11 +458,6 @@ def TropD_Metric_PE(
         bounds_error=False,
         fill_value=(dpedy[..., 0], dpedy[..., -1]),
     )(lat)
-
-    # define latitudes of boundaries certain regions
-    eq_boundary = 5.0
-    subpolar_boundary = 50.0
-    polar_boundary = 60.0
 
     # split into hemispheres
     mask = (lat > eq_boundary) & (lat < polar_boundary)
