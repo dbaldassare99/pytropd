@@ -624,7 +624,12 @@ def TropD_Metric_PSI(
 
 @hemisphere_handler
 def TropD_Metric_PSL(
-    ps: np.ndarray, lat: np.ndarray, method: str = "peak", **maxlat_kwargs
+    ps: np.ndarray, 
+    lat: np.ndarray,
+    eq_boundary = 15,
+    polar_boundary = 60,
+    method: str = "peak",
+    **maxlat_kwargs
 ) -> np.ndarray:
     """
     TropD Sea-level Pressure (PSL) Metric
@@ -676,8 +681,6 @@ def TropD_Metric_PSL(
     # lat should already be last axis
     maxlat_kwargs.pop("axis", None)
 
-    eq_boundary = 15
-    polar_boundary = 60
     mask = (lat > eq_boundary) & (lat < polar_boundary)
 
     Phi = TropD_Calculate_MaxLat(ps[..., mask], lat[mask], **maxlat_kwargs)
