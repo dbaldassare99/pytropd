@@ -943,6 +943,9 @@ def TropD_Metric_UAS(
     U: np.ndarray,
     lat: np.ndarray,
     lev: Optional[np.ndarray] = None,
+    eq_boundary = 5,
+    subpolar_boundary = 30,
+    polar_boundary = 60,
     method: str = "zero_crossing",
     lat_uncertainty: float = 0.0,
 ) -> np.ndarray:
@@ -997,10 +1000,6 @@ def TropD_Metric_UAS(
         uas = uas[..., ::-1]
         lat = lat[::-1]
 
-    # define latitudes of boundaries certain regions
-    eq_boundary = 5
-    subpolar_boundary = 30
-    polar_boundary = 60
     subpolar_mask = (lat > eq_boundary) & (lat < subpolar_boundary)
     mask = (lat > eq_boundary) & (lat < polar_boundary)
 
