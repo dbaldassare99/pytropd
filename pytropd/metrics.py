@@ -159,6 +159,8 @@ def TropD_Metric_EDJ(
     U: np.ndarray,
     lat: np.ndarray,
     lev: Optional[np.ndarray] = None,
+    eq_boundary = 15,
+    polar_boundary = 70,
     method: str = "peak",
     n_fit: int = 1,
     **maxlat_kwargs,
@@ -223,8 +225,6 @@ def TropD_Metric_EDJ(
         raise ValueError("unrecognized method " + method)
     n_fit = int(n_fit)
 
-    eq_boundary = 15.0
-    polar_boundary = 70.0
     mask = (lat > eq_boundary) & (lat < polar_boundary)
 
     if get_lev:
