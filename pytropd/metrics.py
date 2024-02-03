@@ -841,6 +841,8 @@ def TropD_Metric_TPB(
     T: np.ndarray,
     lat: np.ndarray,
     lev: np.ndarray,
+    polar_boundary = 60.0,
+    eq_boundary = 0.0,
     method: str = "max_gradient",
     Z: Optional[np.ndarray] = None,
     Cutoff: float = 1.5e4,
@@ -907,8 +909,6 @@ def TropD_Metric_TPB(
         if Z is not None:
             Z = Z[..., ::-1, :]
 
-    polar_boundary = 60.0
-    eq_boundary = 0.0
     mask = (lat > eq_boundary) & (lat < polar_boundary)
 
     if "max_" in method:  # 'max_gradient' or 'max_potemp'
