@@ -279,6 +279,9 @@ def TropD_Metric_EDJ(
 def TropD_Metric_OLR(
     olr: np.ndarray,
     lat: np.ndarray,
+    eq_boundary = 5.0,
+    subpolar_boundary = 40.0,
+    polar_boundary = 60.0,
     method: str = "250W",
     Cutoff: Optional[float] = None,
     **maxlat_kwargs,
@@ -344,10 +347,6 @@ def TropD_Metric_OLR(
     if lat[-1] < lat[0]:
         olr = olr[..., ::-1]
         lat = lat[::-1]
-
-    eq_boundary = 5.0
-    subpolar_boundary = 40.0
-    polar_boundary = 60.0
 
     subpolar_mask = (lat > eq_boundary) & (lat < subpolar_boundary)
 
